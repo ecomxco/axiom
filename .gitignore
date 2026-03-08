@@ -3,6 +3,7 @@ brain/
 
 # macOS
 .DS_Store
+.axiom-version
 
 # Editors
 .vscode/

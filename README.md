@@ -99,20 +99,45 @@ Unlike generic prompting, Axiom workflows are **deterministic** — they produce
 
 ---
 
-## Quick Start
+## Install
+
+**One-liner** (recommended):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ecomxco/axiom/main/install.sh | bash
+```
+
+This installs all 15 workflows into `.agent/workflows/` in the current directory.
+
+**Options:**
+
+```bash
+# Install into a specific project
+curl -fsSL https://raw.githubusercontent.com/ecomxco/axiom/main/install.sh | bash -s -- --dir ~/projects/my-app
+
+# Install a specific version
+curl -fsSL https://raw.githubusercontent.com/ecomxco/axiom/main/install.sh | bash -s -- --version v1.0.0
+
+# Use Cursor's directory convention
+curl -fsSL https://raw.githubusercontent.com/ecomxco/axiom/main/install.sh | bash -s -- --agent-dir .cursor/rules
+```
+
+**Manual install:**
 
 ```bash
 git clone https://github.com/ecomxco/axiom.git
-cd axiom
+cp -r axiom/workflows/ /path/to/your-project/.agent/workflows/
 ```
 
-Copy the `workflows/` directory into your project:
+### Update
 
 ```bash
-cp -r workflows/ /path/to/your-project/.agent/workflows/
+curl -fsSL https://raw.githubusercontent.com/ecomxco/axiom/main/update.sh | bash
 ```
 
-Then in your agent:
+Updates all workflows while preserving your customized `context.md`.
+
+### Start Using
 
 ```
 /context          # Load project context
