@@ -127,7 +127,7 @@ Unlike generic prompting, Axiom workflows are **deterministic** — they produce
 curl -fsSL https://raw.githubusercontent.com/ecomxco/axiom/main/install.sh | bash
 ```
 
-This installs all 15 workflows into `.agent/workflows/` in the current directory.
+This installs all 19 workflows into `.agent/workflows/` in the current directory.
 
 **Options:**
 
