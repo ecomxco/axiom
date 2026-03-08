@@ -1,0 +1,13 @@
+# Planning artifacts — local only
+brain/
+
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
