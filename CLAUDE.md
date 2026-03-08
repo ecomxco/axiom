@@ -2,7 +2,7 @@
 
 ## Project: Axiom — eComX Workflows
 
-**Author:** Jim Moore (<jim@ecomx.co>)
+**Author:** Jim Moore (<jim@ecom-x.com>)
 **Primary Agent:** Claude / Antigravity
 **Created:** 2026-03-08
 

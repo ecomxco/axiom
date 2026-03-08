@@ -2,11 +2,11 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Workflows](https://img.shields.io/badge/Workflows-15-green.svg)](workflows/)
-[![eComX](https://img.shields.io/badge/Built%20by-eComX-black.svg)](https://ecomx.co)
+[![eComX](https://img.shields.io/badge/Built%20by-eComX-black.svg)](https://ecom-x.com)
 
 > 15 deterministic AI development workflows — plan, build, and verify complex software with zero drift.
 
-Built by [eComX](https://ecomx.co) — the Context-First AI development methodology for serious operators.
+Built by [eComX](https://ecom-x.com) — the Context-First AI development methodology for serious operators.
 
 ---
 
@@ -24,16 +24,16 @@ Unlike generic prompting, Axiom workflows are **deterministic** — they produce
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    PROJECT INITIALIZATION                    │
+│                    PROJECT INITIALIZATION                   │
 │                                                             │
-│   /map-codebase ──→ /plan-project                          │
-│   (brownfield)      (greenfield)                           │
+│   /map-codebase ──→ /plan-project                           │
+│   (brownfield)      (greenfield)                            │
 └───────────────────────┬─────────────────────────────────────┘
                         ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                     PHASE EXECUTION                         │
 │                                                             │
-│   /discuss-phase ──→ /research-phase ──→ /plan-phase       │
+│   /discuss-phase ──→ /research-phase ──→ /plan-phase        │
 │        │                                      │             │
 │        │              ┌───────────────────────┘             │
 │        │              ▼                                     │
@@ -160,7 +160,7 @@ Axiom works across the full eComX tooling stack:
 
 ## Support
 
-- 💬 Questions: [ecomx.co/call](https://ecomx.co/call)
+- 💬 Questions: [ecom-x.com/call](https://ecom-x.com/call)
 - 🐛 Issues: [GitHub Issues](https://github.com/ecomxco/axiom/issues)
 
 ---

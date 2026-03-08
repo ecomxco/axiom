@@ -10,7 +10,7 @@
 
 If you discover a security vulnerability, please report it responsibly:
 
-**Email:** <security@ecomx.co>
+**Email:** <security@ecom-x.com>
 
 **Do NOT** open a public GitHub issue for security vulnerabilities.
 
