@@ -4,7 +4,7 @@ description: Project context and environment setup that should be loaded at the 
 
 # Project Context
 
-Before starting any work, always load environment context:
+Load environment context before starting any work. This workflow auto-discovers your project setup and verifies readiness.
 
 ## 🔒 Security Rules (MANDATORY)
 
@@ -14,59 +14,119 @@ Before starting any work, always load environment context:
 4. **Never log or print** secret values. Only log whether a credential was found (e.g., `✅ SUPABASE_URL loaded`).
 5. **`.env` files in sub-apps** (e.g., `apps/web/.env`) are gitignored and should mirror keys from root `.env`.
 
-## Environment Files
+## 1. Detect Environment Files
 
-The root of the workspace has **two critical env files** with ALL API keys and credentials:
-
-- **`.env`** — Real secrets. GITIGNORED.
-- **`.env.example`** — Template with placeholder values. COMMITTED.
+```bash
+# Check for .env files
+ls -la .env .env.* 2>/dev/null
+cat .env.example 2>/dev/null || echo "No .env.example found"
+```
 
 > **Rule:** When any package or app needs environment variables, pull the real values from the root `.env` instead of creating stubs. The root file is the single source of truth for all credentials.
 
-### Key Variables Available
+### Auto-Discover Key Variables
 
-Load your project's specific environment variables here. Example:
+```bash
+# Extract variable names from .env.example (or .env if no example exists)
+grep -E '^[A-Z_]+=' .env.example 2>/dev/null | cut -d= -f1 | sort
+```
 
-| Service | Key Variables |
-|---------|--------------|
-| **Database** | `DATABASE_URL`, `DATABASE_ANON_KEY`, `DATABASE_SERVICE_ROLE_KEY` |
-| **Commerce** | `STORE_DOMAIN`, `STOREFRONT_ACCESS_TOKEN`, `ADMIN_API_ACCESS_TOKEN` |
-| **Email** | `EMAIL_PUBLIC_KEY`, `EMAIL_PRIVATE_KEY`, `EMAIL_LIST_ID` |
-| **Ads** | `ADS_API_ACCESS_TOKEN`, `AD_ACCOUNT_ID`, `PIXEL_ID` |
-| **Analytics** | `ANALYTICS_MEASUREMENT_ID`, `ANALYTICS_API_SECRET` |
+Present discovered variables grouped by service pattern:
 
-> Customize this table with your actual services and variable names.
+| Pattern | Likely Service |
+|---------|---------------|
+| `DATABASE_*`, `SUPABASE_*`, `DB_*` | Database |
+| `STRIPE_*`, `SHOPIFY_*`, `STORE_*` | Commerce |
+| `SENDGRID_*`, `KLAVIYO_*`, `EMAIL_*` | Email |
+| `GA_*`, `ANALYTICS_*` | Analytics |
+| `AWS_*`, `S3_*`, `CLOUD_*` | Cloud/Storage |
+| `OPENAI_*`, `ANTHROPIC_*`, `AI_*` | AI/ML |
 
-## Project Files to Know
+## 2. Detect Authenticated CLIs
 
-- **`ENVIRONMENT.md`** — Full tech stack, architecture, and CLI documentation
-- **`.planning/STATE.md`** — Current project status and phase progress
-- **`.planning/ROADMAP.md`** — Phase structure with success criteria
+```bash
+# Check which CLIs are available and authenticated
+which git >/dev/null 2>&1 && echo "✅ git $(git --version | cut -d' ' -f3)" || echo "❌ git not found"
+which gh >/dev/null 2>&1 && gh auth status 2>&1 | head -1 || echo "❌ gh not found"
+which node >/dev/null 2>&1 && echo "✅ node $(node --version)" || echo "❌ node not found"
+which npm >/dev/null 2>&1 && echo "✅ npm $(npm --version)" || echo "❌ npm not found"
 
-## CLI Authentication
-
-Document your authenticated CLIs here. Example:
-
-| CLI | Command Prefix | Status |
-|-----|---------------|--------|
-| **Database** | `supabase` | ✅ Authenticated |
-| **Git** | `gh` | ✅ Authenticated |
-| **Deploy** | `vercel` | ✅ Authenticated |
+# Project-specific CLIs (check for common ones)
+which vercel >/dev/null 2>&1 && echo "✅ vercel" || true
+which supabase >/dev/null 2>&1 && echo "✅ supabase" || true
+which docker >/dev/null 2>&1 && echo "✅ docker" || true
+which python3 >/dev/null 2>&1 && echo "✅ python3 $(python3 --version 2>&1 | cut -d' ' -f2)" || true
+which cargo >/dev/null 2>&1 && echo "✅ cargo" || true
+```
 
 > **Rule:** Never ask the user to authenticate or provide credentials. All keys exist in `.env` and all CLIs are pre-authenticated. Just use them.
 
-## Project Structure
+## 3. Detect Project Structure
 
-Document your project's directory layout here. Example:
+```bash
+# Show project layout (2 levels deep, directories only)
+find . -maxdepth 2 -type d -not -path '*/\.*' -not -path '*/node_modules*' | sort | head -30
+
+# Detect project type
+ls package.json 2>/dev/null && echo "→ Node.js project"
+ls Cargo.toml 2>/dev/null && echo "→ Rust project"
+ls requirements.txt pyproject.toml setup.py 2>/dev/null && echo "→ Python project"
+ls go.mod 2>/dev/null && echo "→ Go project"
+
+# Detect monorepo
+ls pnpm-workspace.yaml turbo.json lerna.json 2>/dev/null && echo "→ Monorepo detected"
+```
+
+## 4. Load Planning State
+
+```bash
+# Check for existing Axiom planning state
+ls .planning/STATE.md 2>/dev/null && cat .planning/STATE.md | head -20
+ls .planning/ROADMAP.md 2>/dev/null && echo "→ ROADMAP.md exists"
+ls .planning/PROJECT.md 2>/dev/null && echo "→ PROJECT.md exists"
+```
+
+## 5. Load Project-Specific Docs
+
+Check for these reference files and read them if they exist:
+
+```bash
+# Architecture and environment docs
+cat ENVIRONMENT.md 2>/dev/null || cat .context/ENVIRONMENT.md 2>/dev/null || true
+cat .planning/PROJECT.md 2>/dev/null || true
+```
+
+## 6. Present Context Summary
+
+After auto-discovery, present a compact summary:
 
 ```
-your-project/
-├── .env                    ← ALL secrets (single source of truth)
-├── .env.example            ← Template
-├── .planning/              ← Axiom planning state
-├── src/                    ← Application source
-├── tests/                  ← Test suite
-└── scripts/                ← Automation scripts
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ PROJECT CONTEXT LOADED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Project: [name from package.json/PROJECT.md]
+Type: [language/framework]
+Structure: [monorepo/single-app]
+
+Environment:
+  .env: [found/missing] ([N] variables)
+  CLIs: [list of authenticated CLIs]
+
+Planning State: [active phase/no project initialized]
+
+Ready to work. What would you like to do?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-> Customize this to match your actual project structure.
+## Health Checks
+
+If any critical issues are detected during discovery, surface them:
+
+| Issue | Severity | Suggestion |
+|-------|----------|------------|
+| No `.env` file found | ⚠️ Warning | Create from `.env.example` or ask user for credentials |
+| No `.gitignore` | 🛑 Critical | Create one immediately — risk of committing secrets |
+| `.env` not in `.gitignore` | 🛑 Critical | Add `.env` to `.gitignore` before any commits |
+| No git repo | ⚠️ Warning | Suggest `git init` |
+| `node_modules` committed | ⚠️ Warning | Add to `.gitignore`, remove from tracking |

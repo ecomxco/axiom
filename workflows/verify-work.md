@@ -320,7 +320,34 @@ Options:
 3. Accept — cosmetic issues, not worth a fix plan
 ```
 
-## 10. Commit UAT
+## 10. Capture Lessons (after UAT passes)
+
+After successful verification, append to `.planning/LESSONS.md`:
+
+```markdown
+### Phase [X]: [Name] — Lessons
+
+**Date:** [date]
+
+**What Went Well:**
+- [Pattern or approach that worked — carry forward]
+
+**What to Watch For:**
+- [Gotcha or surprise encountered — warn future phases]
+
+**Process Observations:**
+- [E.g., "Plans were overscoped", "Research phase saved significant rework", etc.]
+```
+
+This file accumulates across phases. `/plan-phase` reads it before planning the next phase to avoid repeating mistakes and reinforce what works.
+
+```bash
+mkdir -p .planning
+git add .planning/LESSONS.md
+git commit -m "docs(phase-XX): lessons learned"
+```
+
+## 11. Commit UAT
 
 ```bash
 git add .planning/phases/XX-name/*-UAT.md

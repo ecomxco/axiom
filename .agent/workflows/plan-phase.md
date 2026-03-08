@@ -20,9 +20,12 @@ cat .planning/ROADMAP.md
 cat .planning/config.json
 cat .planning/phases/XX-name/*-CONTEXT.md 2>/dev/null
 cat .planning/phases/XX-name/*-RESEARCH.md 2>/dev/null
+cat .planning/LESSONS.md 2>/dev/null
 ```
 
 Identify the target phase from the argument or STATE.md current position.
+
+**If LESSONS.md exists:** Review lessons from prior phases. Apply relevant warnings to this phase's plans. Note successful patterns to reinforce.
 
 ## 2. Extract Phase Requirements
 
@@ -52,7 +55,7 @@ From REQUIREMENTS.md, pull full requirement descriptions for mapped REQ-IDs.
 
 **Step 1: State the Goal** — Take phase goal from ROADMAP.md (must be outcome-shaped, not task-shaped)
 
-**Step 2: Derive Observable Truths** — "What must be TRUE for this goal to be achieved?" (3-7 truths from user perspective)
+**Step 2: Derive Observable Truths** — "What must be TRUE for this goal to be achieved?" Derive as many truths as the phase requires (simple phases may have 3, complex phases may have 10+). Cover all user-observable outcomes.
 
 **Step 3: Derive Required Artifacts** — For each truth: "What must EXIST for this to be true?" (specific files)
 
@@ -68,7 +71,7 @@ Each plan = a PLAN.md file in `.planning/phases/XX-name/`.
 
 **Sizing rules:**
 
-- 2-3 tasks per plan (max)
+- Group related tasks into coherent plans (typically 2-4 tasks, but use judgement — a 5-task plan is fine if the tasks are tightly coupled)
 - Each task: 15-60 min execution time
 - Target ~50% context usage per plan
 - More plans > bigger plans (quality preservation)
@@ -240,7 +243,7 @@ Re-read all plans just created and check:
 | **Test coverage** | Does TEST-MATRIX.md cover all 8 test types? Are any marked N/A without justification? |
 | **Security** | Are RLS, auth, and input validation tests defined for every new table/endpoint? |
 
-**If issues found:** Fix them before committing. Max 2 revision passes.
+**If issues found:** Fix them before committing. Revise until clean — don't stop at a fixed number of passes.
 
 **If clean:** Continue to commit.
 

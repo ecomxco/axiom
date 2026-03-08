@@ -68,13 +68,13 @@ We'll clarify HOW to implement this.
 (New capabilities belong in other phases.)
 ```
 
-Then present 3-5 phase-specific gray areas for the user to select which ones to discuss.
+Then present **all** phase-specific gray areas you identify (typically 3-8, but complex phases may have more). Let the user select which ones to discuss. Never cap the number — surface every legitimate gray area.
 
 ## 4. Discuss Selected Areas
 
 For each selected area, conduct a focused discussion:
 
-- **4 questions per area, then check:** Ask 4 questions → offer "More questions?" or "Next area?"
+- **Exhaust each area, then check:** Ask questions until the area is fully clarified → offer "More to discuss here?" or "Next area?" Don't cap at a fixed number — some areas need 2 questions, others need 8.
 - **Concrete options, not abstract:** "Cards" not "Option A"
 - **Include "You decide" as an option** when reasonable — captures Claude's discretion areas
 

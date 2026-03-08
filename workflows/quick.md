@@ -11,7 +11,15 @@ Lightweight task execution for small, well-understood work.
 - You know exactly what to do
 - Task is small (< 1 hour)
 - Doesn't need research or verification ceremony
-- Examples: "Update brand doc", "Fix CSS bug", "Add Klaviyo field", "Tweak Supabase schema"
+- Examples: "Update config file", "Fix CSS bug", "Add database field", "Tweak API response format"
+
+## Risk Check
+
+Before proceeding, quick-assess: **Could this break existing functionality?**
+
+- If **no** (cosmetic, docs, new isolated addition) → continue with `/quick`
+- If **maybe** (modifying shared code, changing schema, touching auth) → suggest `/plan-phase` instead: "This touches [shared concern]. Consider using the full planning workflow to catch side effects."
+- If **yes** (breaking change, migration, API contract change) → route to `/plan-phase`
 
 ## Prerequisites
 

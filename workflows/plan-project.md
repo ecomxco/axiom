@@ -112,7 +112,7 @@ git add .planning/PROJECT.md && git commit -m "docs: initialize project"
 
 Ask the user about preferences:
 
-**Depth:** Quick (3-5 phases) / Standard (5-8 phases) / Comprehensive (8-12 phases)
+**Depth:** Quick (~3-5 phases) / Standard (~5-8 phases) / Comprehensive (~8-12+ phases). These are guidelines, not caps — let the project's actual complexity determine the phase count.
 
 Create `.planning/config.json`:
 
