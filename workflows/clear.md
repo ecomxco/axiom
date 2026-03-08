@@ -6,6 +6,14 @@ description: Save state and prepare for a fresh context window
 
 Saves current work state and prepares for a fresh context window. Ensures session continuity by persisting progress to disk before clearing.
 
+**Use `/clear` vs `/pause-work`:**
+
+| Situation | Use | Why |
+|-----------|-----|-----|
+| Between workflow steps (plan → execute) | `/clear` | STATE.md tracks position, no mid-task detail needed |
+| Context window is growing large | `/clear` | Quick state save + fresh start |
+| Stopping mid-task, work is incomplete | `/pause-work` | Need detailed handoff with mental context, in-progress state |
+
 ## When to Use
 
 - Context is growing large after extended execution

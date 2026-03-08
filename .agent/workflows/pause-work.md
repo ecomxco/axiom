@@ -6,10 +6,18 @@ description: Create a handoff file preserving complete work state for seamless s
 
 Creates `.continue-here.md` so a fresh session can instantly pick up where you left off.
 
+**Use `/pause-work` vs `/clear`:**
+
+| Situation | Use | Why |
+|-----------|-----|-----|
+| Stopping mid-task, work is incomplete | `/pause-work` | Captures granular context (mental state, next action, in-progress details) |
+| Between workflow steps, just need fresh context | `/clear` | STATE.md has enough info, no mid-task detail needed |
+| Switching to a different project temporarily | `/pause-work` | You'll need the detailed handoff to remember where you were |
+
 ## When to Use
 
 - Ending a work session mid-phase
-- Context is getting large and you need to `/clear`
+- Stopping mid-task and want granular handoff
 - Switching to a different task temporarily
 
 ## 1. Detect Current Work

@@ -23,6 +23,30 @@ ls .planning/phases/XX-name/*-SUMMARY.md 2>/dev/null | sort
 
 Identify next PLAN without a matching SUMMARY.
 
+## 1.5 Pre-Execution Checkpoint
+
+Before executing, create a recovery point:
+
+```bash
+# Tag current state for rollback
+git tag -f "pre-phase-XX-plan-NN" HEAD
+```
+
+**If execution goes catastrophically wrong** (corrupt state, wrong branch, broken build that can't be fixed forward):
+
+```bash
+# Rollback to pre-execution state
+git reset --hard pre-phase-XX-plan-NN
+
+# Clean up any untracked files from the failed execution
+git clean -fd
+
+# Remove the failed summary if one was started
+rm -f .planning/phases/XX-name/XX-NN-SUMMARY.md
+```
+
+Then re-run `/execute-phase` from the recovered state. The plan is unchanged — only the execution failed.
+
 ## 2. Execute Plan
 
 For the current PLAN.md:
@@ -138,8 +162,9 @@ After spot-check passes, create `{phase}-{plan}-SUMMARY.md`:
 ---
 phase: XX-name
 plan: NN
+started: [YYYY-MM-DD HH:MM]
+completed: [YYYY-MM-DD HH:MM]
 duration: [X min]
-completed: [YYYY-MM-DD]
 ---
 
 # Phase [X] Plan [Y]: [Name] Summary
