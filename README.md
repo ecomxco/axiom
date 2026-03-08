@@ -1,10 +1,10 @@
 # Axiom
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Workflows](https://img.shields.io/badge/Workflows-15-green.svg)](workflows/)
+[![Workflows](https://img.shields.io/badge/Workflows-19-green.svg)](workflows/)
 [![eComX](https://img.shields.io/badge/Built%20by-eComX-black.svg)](https://ecom-x.com)
 
-> 15 deterministic AI development workflows — plan, build, and verify complex software with zero drift.
+> 19 deterministic AI development workflows — plan, build, verify, and deploy complex software with zero drift.
 
 Built by [eComX](https://ecom-x.com) — the Context-First AI development methodology for serious operators.
 
@@ -12,7 +12,7 @@ Built by [eComX](https://ecom-x.com) — the Context-First AI development method
 
 ## What This Is
 
-Axiom is a complete workflow suite for agentic software development. 15 markdown workflow files, each a precise, step-by-step process your AI agent follows as a slash command.
+Axiom is a complete workflow suite for agentic software development. 19 markdown workflow files, each a precise, step-by-step process your AI agent follows as a slash command.
 
 Unlike generic prompting, Axiom workflows are **deterministic** — they produce consistent, auditable results every time. Each workflow has a defined input, a defined output, and clear deviation handling.
 
@@ -49,13 +49,24 @@ Unlike generic prompting, Axiom workflows are **deterministic** — they produce
 │        │    Next Phase   /diagnose-issues ──→ /plan-phase   │
 │        │         │                           (--gaps)       │
 │        └─────────┘                                          │
+└───────────────────────┬─────────────────────────────────────┘
+                        ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  DEPLOYMENT & MAINTENANCE                    │
+│                                                             │
+│   /deploy ──→ /retrospective                                │
+│      │                                                      │
+│   FAIL? ──→ Rollback ──→ /diagnose-issues                   │
+│                                                             │
+│   /dependency-audit    Periodic security & license check     │
+│   /scope-change        Mid-project scope management          │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
 │                   SESSION MANAGEMENT                        │
 │                                                             │
 │   /context     Load project context at session start        │
-│   /progress    Check current status                         │
+│   /progress    Check current status + risk analysis         │
 │   /quick       Fast execution for small tasks               │
 │   /pause-work  Save state for session handoff               │
 │   /resume-project  Restore full context                     │
@@ -65,7 +76,7 @@ Unlike generic prompting, Axiom workflows are **deterministic** — they produce
 
 ---
 
-## The 15 Workflows
+## The 19 Workflows
 
 ### Project Initialization
 
@@ -84,16 +95,25 @@ Unlike generic prompting, Axiom workflows are **deterministic** — they produce
 | Analyze Gaps | `/analyze-gaps` | Find gaps in plans before execution |
 | Execute Phase | `/execute-phase` | Execute plans sequentially with deviation handling |
 | Verify Work | `/verify-work` | Goal-backward verification with UAT tracking |
-| Diagnose Issues | `/diagnose-issues` | Root cause analysis before planning fixes |
+| Diagnose Issues | `/diagnose-issues` | Root cause analysis with taxonomy and ruled-out tracking |
+
+### Deployment & Maintenance
+
+| Workflow | Command | Purpose |
+|----------|---------|---------|
+| Deploy | `/deploy` | Pre-deploy checklist, smoke test, rollback protocol |
+| Retrospective | `/retrospective` | End-of-milestone reflection with velocity analysis |
+| Scope Change | `/scope-change` | Formal mid-project scope change with impact analysis |
+| Dependency Audit | `/dependency-audit` | Security vulns, outdated packages, license compliance |
 
 ### Session Management
 
 | Workflow | Command | Purpose |
 |----------|---------|---------|
-| Context | `/context` | Load full project context at session start |
-| Progress | `/progress` | Current status — what's done, what's next |
-| Quick | `/quick` | Fast task execution for small, well-understood tasks |
-| Pause Work | `/pause-work` | Handoff file for seamless session resumption |
+| Context | `/context` | Auto-discover project environment at session start |
+| Progress | `/progress` | Status + risk analysis, velocity trends, test debt |
+| Quick | `/quick` | Fast task execution with risk gate |
+| Pause Work | `/pause-work` | Granular handoff file for mid-task session pause |
 | Resume Project | `/resume-project` | Restore full context across sessions |
 | Clear | `/clear` | Save state and prepare for fresh context window |
 
