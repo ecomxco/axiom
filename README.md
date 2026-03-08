@@ -52,14 +52,14 @@ Unlike generic prompting, Axiom workflows are **deterministic** — they produce
 └───────────────────────┬─────────────────────────────────────┘
                         ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                  DEPLOYMENT & MAINTENANCE                    │
+│                  DEPLOYMENT & MAINTENANCE                   │
 │                                                             │
 │   /deploy ──→ /retrospective                                │
 │      │                                                      │
 │   FAIL? ──→ Rollback ──→ /diagnose-issues                   │
 │                                                             │
-│   /dependency-audit    Periodic security & license check     │
-│   /scope-change        Mid-project scope management          │
+│   /dependency-audit    Periodic security & license check    │
+│   /scope-change        Mid-project scope management         │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
